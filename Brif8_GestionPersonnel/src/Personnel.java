@@ -96,7 +96,6 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 		}catch(Exception e) {
 			System.out.print(e);
 		}
-		System.out.println("\t \n 1 est OK");
 		
 		if (choixtype == 1) {
 			//1
@@ -190,7 +189,7 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 	
 	//UPDATE
 	public void modifierEmploye(int id, String nom,String prenom,int age,int choixtype) throws SQLException {
-		if(choixtype == 1 || choixtype == 2 || choixtype == 3 || choixtype == 4) {
+		if(choixtype == 1 || choixtype == 2 || choixtype == 3 || choixtype == 4  || choixtype == 5  || choixtype == 6) {
 			String query = "";
 			con.Connect();
 			PreparedStatement ps = null;
@@ -626,6 +625,7 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 			ps.setDouble(3, valeurtotal);
 			ps.setInt(4, id);
 			ps.executeUpdate();
+			System.out.println("\n Salaire Total est :"+ valeurtotal + " DH");
 			System.out.println("\n Salaire ajouter avec succes");
 		}catch(Exception e) {
 			System.out.print(e);
@@ -669,14 +669,14 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 				con.rs = con.stat.executeQuery(query);
 				while(con.rs.next()) {
 					id_post = con.rs.getInt("id_post_de_travail");
-					System.out.println("\n id_post_de_travail"+id_post);
+					System.out.println("\n id_post_de_travail :"+id_post);
 				}
 
 				//con.Connect();
 				con.stat = con.conn.createStatement();
 				con.rs = con.stat.executeQuery("SELECT AVG(`Salire_total`) AS Moyene , id_poste_de_travail FROM info_salaire WHERE `id_poste_de_travail` ="+id_post);
 				while(con.rs.next()) {
-					System.out.println(" -------> ID:  " + "\t" +con.rs.getInt("id_poste_de_travail") + "\n \t La Moyene: " + con.rs.getString("Moyene"));
+					System.out.println(" -------> ID:  " + "\t" +con.rs.getInt("id_poste_de_travail") + "\n \t La Moyene: " + con.rs.getString("Moyene") +" DH");
 				}
 				break;
 				default:

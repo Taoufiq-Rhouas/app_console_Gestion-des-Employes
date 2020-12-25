@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 25 déc. 2020 à 20:54
+-- Généré le : ven. 25 déc. 2020 à 23:20
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.11
 
@@ -43,11 +43,12 @@ INSERT INTO `employe` (`id_employer`, `nom`, `prenom`, `age`) VALUES
 (2, 'NT1', 'PT1', 10),
 (4, 'NT', 'PT3', 30),
 (5, 'DD', 'DD', 22),
-(6, 'KKL1', 'KKL1', 11),
 (8, 'S', 'S', 2),
 (9, 'OUM', 'RH', 22),
 (10, 'OUM12', 'RH2', 33),
-(11, 'ZZ', 'MM', 11);
+(11, 'ZZ', 'MM', 11),
+(12, 'SALOU', 'LBAYAD', 22),
+(13, 'SSA', 'NNA', 22);
 
 -- --------------------------------------------------------
 
@@ -72,7 +73,11 @@ INSERT INTO `info_salaire` (`id_info_salaire`, `date`, `chifredaffire`, `Salire_
 (3, '2020-12-25', 20, 100, 6),
 (4, '2020-12-25', 40, 200, 6),
 (11, '2020-12-25', 66, 530, 14),
-(16, '2020-12-25', 200, 1540, 25);
+(16, '2020-12-25', 200, 1540, 25),
+(17, '2020-12-25', 55, 475, 22),
+(18, '2020-12-25', 33, 365, 22),
+(19, '2020-12-25', 66, 3300, 21),
+(20, '2020-12-25', 44, 220, 28);
 
 -- --------------------------------------------------------
 
@@ -98,18 +103,18 @@ INSERT INTO `poste_de_travail` (`id_post_de_travail`, `date_dentree_service`, `t
 (4, '2020-12-24', 'la_Manutention', 0, 4),
 (6, '2020-12-24', 'la_Production', 0, 5),
 (7, '2020-12-24', 'la_Manutention', 0, 2),
-(8, '2020-12-24', 'la_Representation', 0, 6),
 (9, '2020-12-25', 'la_Vente', 0, 2),
-(10, '2020-12-25', 'la_Manutention_a_risques', 0, 6),
 (11, '2020-12-25', 'la_Production_a_risques', 0, 2),
 (12, '2020-12-25', 'la_Production_a_risques', 1, 5),
-(13, '2020-12-25', 'la_Production_a_risques', 1, 6),
 (14, '2020-12-25', 'la_Production_a_risques', 1, 2),
-(21, '2020-12-25', 'la_Manutention', 1, 8),
+(21, '2020-12-25', 'la_Manutention', 0, 8),
 (22, '2020-12-25', 'la_Production_a_risques', 1, 9),
 (23, '2020-12-25', 'la_Manutention_a_risques', 1, 10),
 (24, '2020-12-25', 'la_Representation', 1, 11),
-(25, '2020-12-25', 'la_Vente', 1, 4);
+(25, '2020-12-25', 'la_Vente', 1, 4),
+(26, '2020-12-25', 'la_Representation', 1, 12),
+(27, '2020-12-25', 'la_Representation', 1, 13),
+(28, '2020-12-25', 'la_Production', 1, 8);
 
 --
 -- Index pour les tables déchargées
@@ -143,19 +148,19 @@ ALTER TABLE `poste_de_travail`
 -- AUTO_INCREMENT pour la table `employe`
 --
 ALTER TABLE `employe`
-  MODIFY `id_employer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_employer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `info_salaire`
 --
 ALTER TABLE `info_salaire`
-  MODIFY `id_info_salaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_info_salaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `poste_de_travail`
 --
 ALTER TABLE `poste_de_travail`
-  MODIFY `id_post_de_travail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_post_de_travail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Contraintes pour les tables déchargées
