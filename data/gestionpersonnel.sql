@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 25 déc. 2020 à 16:42
+-- Généré le : ven. 25 déc. 2020 à 20:54
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.11
 
@@ -41,11 +41,13 @@ CREATE TABLE `employe` (
 INSERT INTO `employe` (`id_employer`, `nom`, `prenom`, `age`) VALUES
 (1, 'toto', 'rh', 22),
 (2, 'NT1', 'PT1', 10),
-(3, 'NOUVELNM\"', 'NOUVELPR3', 3333),
 (4, 'NT', 'PT3', 30),
 (5, 'DD', 'DD', 22),
 (6, 'KKL1', 'KKL1', 11),
-(7, 'YASSINE2', 'AIBI2', 44);
+(8, 'S', 'S', 2),
+(9, 'OUM', 'RH', 22),
+(10, 'OUM12', 'RH2', 33),
+(11, 'ZZ', 'MM', 11);
 
 -- --------------------------------------------------------
 
@@ -67,15 +69,10 @@ CREATE TABLE `info_salaire` (
 
 INSERT INTO `info_salaire` (`id_info_salaire`, `date`, `chifredaffire`, `Salire_total`, `id_poste_de_travail`) VALUES
 (1, '2020-12-25', 100, 1520, 1),
-(2, '2020-12-25', 20, 100, 3),
 (3, '2020-12-25', 20, 100, 6),
 (4, '2020-12-25', 40, 200, 6),
-(10, '2020-12-25', 44, 420, 3),
 (11, '2020-12-25', 66, 530, 14),
-(12, '2020-12-25', 88, 640, 15),
-(13, '2020-12-25', 56, 3000, 18),
-(14, '2020-12-25', 22, 1300, 18),
-(15, '2020-12-25', 90, 2518, 20);
+(16, '2020-12-25', 200, 1540, 25);
 
 -- --------------------------------------------------------
 
@@ -87,6 +84,7 @@ CREATE TABLE `poste_de_travail` (
   `id_post_de_travail` int(11) NOT NULL,
   `date_dentree_service` varchar(60) NOT NULL,
   `type` varchar(60) NOT NULL,
+  `status` int(11) NOT NULL,
   `id_employer` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -94,26 +92,24 @@ CREATE TABLE `poste_de_travail` (
 -- Déchargement des données de la table `poste_de_travail`
 --
 
-INSERT INTO `poste_de_travail` (`id_post_de_travail`, `date_dentree_service`, `type`, `id_employer`) VALUES
-(1, '2020-12-24', 'la_Vente', 1),
-(2, '2020-10-24', 'la_Vente', 2),
-(3, '2020-12-24', 'la_Production', 3),
-(4, '2020-12-24', 'la_Manutention', 4),
-(6, '2020-12-24', 'la_Production', 5),
-(7, '2020-12-24', 'la_Manutention', 2),
-(8, '2020-12-24', 'la_Representation', 6),
-(9, '2020-12-25', 'la_Vente', 2),
-(10, '2020-12-25', 'la_Manutention_a_risques', 6),
-(11, '2020-12-25', 'la_Production_a_risques', 2),
-(12, '2020-12-25', 'la_Production_a_risques', 5),
-(13, '2020-12-25', 'la_Production_a_risques', 6),
-(14, '2020-12-25', 'la_Production_a_risques', 2),
-(15, '2020-12-25', 'la_Production_a_risques', 3),
-(16, '2020-12-25', 'la_Manutention_a_risques', 3),
-(17, '2020-12-25', 'la_Production', 3),
-(18, '2020-12-25', 'la_Manutention_a_risques', 3),
-(19, '2020-12-25', 'la_Vente', 7),
-(20, '2020-12-25', 'la_Representation', 7);
+INSERT INTO `poste_de_travail` (`id_post_de_travail`, `date_dentree_service`, `type`, `status`, `id_employer`) VALUES
+(1, '2020-12-24', 'la_Vente', 1, 1),
+(2, '2020-10-24', 'la_Vente', 0, 2),
+(4, '2020-12-24', 'la_Manutention', 0, 4),
+(6, '2020-12-24', 'la_Production', 0, 5),
+(7, '2020-12-24', 'la_Manutention', 0, 2),
+(8, '2020-12-24', 'la_Representation', 0, 6),
+(9, '2020-12-25', 'la_Vente', 0, 2),
+(10, '2020-12-25', 'la_Manutention_a_risques', 0, 6),
+(11, '2020-12-25', 'la_Production_a_risques', 0, 2),
+(12, '2020-12-25', 'la_Production_a_risques', 1, 5),
+(13, '2020-12-25', 'la_Production_a_risques', 1, 6),
+(14, '2020-12-25', 'la_Production_a_risques', 1, 2),
+(21, '2020-12-25', 'la_Manutention', 1, 8),
+(22, '2020-12-25', 'la_Production_a_risques', 1, 9),
+(23, '2020-12-25', 'la_Manutention_a_risques', 1, 10),
+(24, '2020-12-25', 'la_Representation', 1, 11),
+(25, '2020-12-25', 'la_Vente', 1, 4);
 
 --
 -- Index pour les tables déchargées
@@ -147,19 +143,19 @@ ALTER TABLE `poste_de_travail`
 -- AUTO_INCREMENT pour la table `employe`
 --
 ALTER TABLE `employe`
-  MODIFY `id_employer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_employer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `info_salaire`
 --
 ALTER TABLE `info_salaire`
-  MODIFY `id_info_salaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_info_salaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `poste_de_travail`
 --
 ALTER TABLE `poste_de_travail`
-  MODIFY `id_post_de_travail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_post_de_travail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Contraintes pour les tables déchargées

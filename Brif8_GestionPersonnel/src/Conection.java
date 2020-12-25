@@ -19,7 +19,7 @@ public class Conection {
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/gestionpersonnel", "testetoto" , "test1234");
-			System.out.println("ok");
+			//System.out.println("ok");
 		}catch (SQLException e) {
 			System.out.print(e);
 		}

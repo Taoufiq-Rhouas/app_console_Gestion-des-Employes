@@ -66,12 +66,12 @@ public class Salaires {
 					//2
 					System.out.println("\n choisi le type de l'employé pour Afficher :"
 							 		 + "\n -----------------------"
-							 		 + "\n Ceux affectés à la Vente          :1"
-							 		 + "\n Ceux affectés à la Représentation :2"
-							 		 + "\n Ceux affectés à la Production     :3"
-							 		 + "\n Ceux affectés à la Manutention    :4"
-							 		 + "\n Ceux affectés à la Production a risques :5"
-							 		 + "\n Ceux affectés à la Manutention a risques:6");
+							 		 + "\n Ceux affectés à la Vente ----------------->:1"
+							 		 + "\n Ceux affectés à la Représentation -------->:2"
+							 		 + "\n Ceux affectés à la Production ------------>:3"
+							 		 + "\n Ceux affectés à la Manutention ----------->:4"
+							 		 + "\n Ceux affectés à la Production a risques -->:5"
+							 		 + "\n Ceux affectés à la Manutention a risques ->:6");
 					choixtype = scan.nextInt();
 					try {
 						personnel.AfficherEmploye(choixtype);
@@ -85,10 +85,10 @@ public class Salaires {
 					//read
 					System.out.println("\n choisi le type de l'employé pour Modifier :"
 					 		 + "\n -----------------------"
-					 		 + "\n Ceux affectés à la Vente          :1"
-					 		 + "\n Ceux affectés à la Représentation :2"
-					 		 + "\n Ceux affectés à la Production     :3"
-					 		 + "\n Ceux affectés à la Manutention    :4");
+					 		 + "\n Ceux affectés à la Vente ---------->:1"
+					 		 + "\n Ceux affectés à la Représentation ->:2"
+					 		 + "\n Ceux affectés à la Production ----->:3"
+					 		 + "\n Ceux affectés à la Manutention ---->:4");
 					choixtype = scan.nextInt();
 					try {
 						personnel.AfficherEmploye(choixtype);
@@ -117,10 +117,10 @@ public class Salaires {
 					//read
 					System.out.println("\n choisi le type de l'employé pour Supprimer :"
 					 		 + "\n -----------------------"
-					 		 + "\n Ceux affectés à la Vente          :1"
-					 		 + "\n Ceux affectés à la Représentation :2"
-					 		 + "\n Ceux affectés à la Production     :3"
-					 		 + "\n Ceux affectés à la Manutention    :4");
+					 		 + "\n Ceux affectés à la Vente ---------->:1"
+					 		 + "\n Ceux affectés à la Représentation ->:2"
+					 		 + "\n Ceux affectés à la Production ----->:3"
+					 		 + "\n Ceux affectés à la Manutention ---->:4");
 					choixtype = scan.nextInt();
 					try {
 						personnel.AfficherEmploye(choixtype);

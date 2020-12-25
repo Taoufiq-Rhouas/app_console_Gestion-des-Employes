@@ -122,11 +122,12 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 		if(choixtype == 1 || choixtype == 2 || choixtype == 3 || choixtype == 4 || choixtype == 5 || choixtype == 6) {
 			try {
 
-				query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`, `id_employer`) VALUES (?,?,?)";
+				query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`,`status`, `id_employer`) VALUES (?,?,?,?)";
 				ps=con.conn.prepareStatement(query);
 				ps.setString(1, date_dentree_service);
 				ps.setString(2, typePost);
-				ps.setInt(3, primkey);
+				ps.setInt(3, 1);
+				ps.setInt(4, primkey);
 				ps.executeUpdate();
 				System.out.println("\n Ajouter Employer Avec succes");	
 			}catch(Exception e) {
@@ -145,32 +146,32 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 				System.out.println("\t \n ------------------------------------------- ");
 				System.out.println("\t \n Liste des Employes Ceux affectés à la Vente ");
 				System.out.println("\t \n ------------------------------------------- ");
-				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Vente'";
+				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Vente' AND `poste_de_travail`.`status` = 1";
 			}else if(choixtype == 2) {
 				System.out.println("\t \n --------------------------------------------------- ");
 				System.out.println("\t \n Liste des Employes Ceux affectés à la Représentation ");
 				System.out.println("\t \n --------------------------------------------------- ");
-				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Representation'";
+				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Representation' AND `poste_de_travail`.`status` = 1";
 			}else if(choixtype == 3) {
 				System.out.println("\t \n ------------------------------------------------ ");
 				System.out.println("\t \n Liste des Employes Ceux affectés à la Production ");
 				System.out.println("\t \n ------------------------------------------------ ");
-				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Production'";
+				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Production' AND `poste_de_travail`.`status` = 1";
 			}else if(choixtype == 4) {
 				System.out.println("\t \n ------------------------------------------------- ");
 				System.out.println("\t \n Liste des Employes Ceux affectés à la Manutention ");
 				System.out.println("\t \n ------------------------------------------------- ");
-				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Manutention'";
+				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Manutention' AND `poste_de_travail`.`status` = 1";
 			}else if(choixtype == 5) {
 				System.out.println("\t \n ------------------------------------------------- ");
 				System.out.println("\t \n Liste des Employes Ceux affectés à la Production a risques ");
 				System.out.println("\t \n ------------------------------------------------- ");
-				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Production_a_risques'";
+				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Production_a_risques' AND `poste_de_travail`.`status` = 1";
 			}else if(choixtype == 6) {
 				System.out.println("\t \n ------------------------------------------------- ");
 				System.out.println("\t \n Liste des Employes Ceux affectés à la Manutention a risques ");
 				System.out.println("\t \n ------------------------------------------------- ");
-				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Manutention_a_risques'";
+				query="SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `poste_de_travail`.`type` = 'la_Manutention_a_risques' AND `poste_de_travail`.`status` = 1";
 			}
 			con.Connect();
 			con.stat = con.conn.createStatement();
@@ -272,7 +273,7 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 		}
 		//info post de traveil
 		System.out.println("\n ------->Information Poste De Travail :");
-		query = "SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `employe`.`id_employer` ="+id + " ORDER BY `poste_de_travail`.id_post_de_travail DESC LIMIT 1";
+		query = "SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `employe`.`id_employer` ="+id + " AND `poste_de_travail`.`status` = 1 ORDER BY `poste_de_travail`.id_post_de_travail DESC LIMIT 1";
 		con.Connect();
 		con.stat = con.conn.createStatement();
 		con.rs = con.stat.executeQuery(query);
@@ -294,7 +295,6 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 								+ "\n changer le post et ajouter le salaire :2");
 			choixtype = scan.nextInt();
 			if (choixtype == 1) {
-				System.out.println("\n \t ANA HNA 2 !");
 				//Ajouter le salaire sur le meme poste
 				if (TypeDePost.equals("la_Vente")) {
 					System.out.println("\n Entrer le chiffre d'affaire:");
@@ -334,12 +334,12 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 				//changer le post et ajouter le salaire
 				System.out.println("\t \n Choisir le type pour changer:"
 									+ "\n -----------------------"
-							 		+ "\n Ceux affectés à la Vente                 :1"
-							 		+ "\n Ceux affectés à la Représentation        :2"
-							 		+ "\n Ceux affectés à la Production            :3"
-							 		+ "\n Ceux affectés à la Manutention           :4"
-							 		+ "\n Ceux affectés à la production à risques  :5"
-							 		+ "\n Ceux affectés à la manutention à risques :6");
+							 		+ "\n Ceux affectés à la Vente ----------------->:1"
+							 		+ "\n Ceux affectés à la Représentation -------->:2"
+							 		+ "\n Ceux affectés à la Production ------------>:3"
+							 		+ "\n Ceux affectés à la Manutention ----------->:4"
+							 		+ "\n Ceux affectés à la production à risques -->:5"
+							 		+ "\n Ceux affectés à la manutention à risques ->:6");
 				choixtype = scan.nextInt();
 				PreparedStatement ps = null;
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");		
@@ -348,11 +348,24 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 
 				if (choixtype == 1) {
 					try {
-						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`, `id_employer`) VALUES (?,?,?)";
+						//UPDATE
+						try {
+							query = "UPDATE `poste_de_travail` SET `status`=? WHERE `id_employer`=?";
+							ps=con.conn.prepareStatement(query);
+							ps.setInt(1, 0);
+							ps.setInt(2, IdDeemployer);
+							ps.executeUpdate();
+							
+						}catch (Exception e){
+							
+						}
+						//ENDTEST
+						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`,`status`, `id_employer`) VALUES (?,?,?,?)";
 						ps=con.conn.prepareStatement(query);
 						ps.setString(1, dateNow);
 						ps.setString(2, "la_Vente");
-						ps.setInt(3, IdDeemployer);
+						ps.setInt(3, 1);
+						ps.setInt(4, IdDeemployer);
 						ps.executeUpdate();
 						query = "SELECT * FROM `poste_de_travail` ORDER BY `poste_de_travail`.id_post_de_travail DESC LIMIT 1";
 						con.Connect();
@@ -373,11 +386,24 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 					
 				}else if (choixtype == 2) {
 					try {
-						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`, `id_employer`) VALUES (?,?,?)";
+						//UPDATE
+						try {
+							query = "UPDATE `poste_de_travail` SET `status`=? WHERE `id_employer`=?";
+							ps=con.conn.prepareStatement(query);
+							ps.setInt(1, 0);
+							ps.setInt(2, IdDeemployer);
+							ps.executeUpdate();
+							
+						}catch (Exception e){
+							
+						}
+						//ENDTEST
+						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`,`status`, `id_employer`) VALUES (?,?,?,?)";
 						ps=con.conn.prepareStatement(query);
 						ps.setString(1, dateNow);
 						ps.setString(2, "la_Representation");
-						ps.setInt(3, IdDeemployer);
+						ps.setInt(3, 1);
+						ps.setInt(4, IdDeemployer);
 						ps.executeUpdate();
 
 						query = "SELECT * FROM `poste_de_travail` ORDER BY `poste_de_travail`.id_post_de_travail DESC LIMIT 1";
@@ -398,11 +424,24 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 					calculerSalaires(primkey2,chiffre_daffaire,2);
 				}else if (choixtype == 3) {
 					try {
-						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`, `id_employer`) VALUES (?,?,?)";
+						//UPDATE
+						try {
+							query = "UPDATE `poste_de_travail` SET `status`=? WHERE `id_employer`=?";
+							ps=con.conn.prepareStatement(query);
+							ps.setInt(1, 0);
+							ps.setInt(2, IdDeemployer);
+							ps.executeUpdate();
+							
+						}catch (Exception e){
+							
+						}
+						//ENDTEST
+						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`,`status`, `id_employer`) VALUES (?,?,?,?)";
 						ps=con.conn.prepareStatement(query);
 						ps.setString(1, dateNow);
 						ps.setString(2, "la_Production");
-						ps.setInt(3, IdDeemployer);
+						ps.setInt(3, 1);
+						ps.setInt(4, IdDeemployer);
 						ps.executeUpdate();
 
 						query = "SELECT * FROM `poste_de_travail` ORDER BY `poste_de_travail`.id_post_de_travail DESC LIMIT 1";
@@ -423,11 +462,24 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 					calculerSalaires(primkey2,nombre_dunites_produites,3);
 				}else if (choixtype == 4) {
 					try {
-						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`, `id_employer`) VALUES (?,?,?)";
+						//UPDATE
+						try {
+							query = "UPDATE `poste_de_travail` SET `status`=? WHERE `id_employer`=?";
+							ps=con.conn.prepareStatement(query);
+							ps.setInt(1, 0);
+							ps.setInt(2, IdDeemployer);
+							ps.executeUpdate();
+							
+						}catch (Exception e){
+							
+						}
+						//ENDTEST
+						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`,`status`, `id_employer`) VALUES (?,?,?,?)";
 						ps=con.conn.prepareStatement(query);
 						ps.setString(1, dateNow);
 						ps.setString(2, "la_Manutention");
-						ps.setInt(3, IdDeemployer);
+						ps.setInt(3, 1);
+						ps.setInt(4, IdDeemployer);
 						ps.executeUpdate();
 
 						query = "SELECT * FROM `poste_de_travail` ORDER BY `poste_de_travail`.id_post_de_travail DESC LIMIT 1";
@@ -450,19 +502,25 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 				}else if (choixtype == 5) {
 					
 					try {
-						System.out.println("\n date_dentree_service"+dateNow+"\n id_employer"+IdDeemployer);
-						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`, `id_employer`) VALUES (?,?,?)";
-						System.out.println("\n 1");
+						//UPDATE
+						try {
+							query = "UPDATE `poste_de_travail` SET `status`=? WHERE `id_employer`=?";
+							ps=con.conn.prepareStatement(query);
+							ps.setInt(1, 0);
+							ps.setInt(2, IdDeemployer);
+							ps.executeUpdate();
+							
+						}catch (Exception e){
+							
+						}
+						//ENDTEST
+						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`,`status`, `id_employer`) VALUES (?,?,?,?)";
 						ps=con.conn.prepareStatement(query);
-						System.out.println("\n 2");
 						ps.setString(1, dateNow);
-						System.out.println("\n 3");
 						ps.setString(2, "la_Production_a_risques");
-						System.out.println("\n 4");
-						ps.setInt(3, IdDeemployer);
-						System.out.println("\n 5");
+						ps.setInt(3, 1);
+						ps.setInt(4, IdDeemployer);
 						ps.executeUpdate();
-						System.out.println("\n 6");
 
 						//return id
 						query = "SELECT * FROM `poste_de_travail` ORDER BY `poste_de_travail`.id_post_de_travail DESC LIMIT 1";
@@ -485,12 +543,25 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 					calculerSalaires(primkey2,nombre_dunites_produites,5);
 				}else if (choixtype == 6) {
 					try {
+						//UPDATE
+						try {
+							query = "UPDATE `poste_de_travail` SET `status`=? WHERE `id_employer`=?";
+							ps=con.conn.prepareStatement(query);
+							ps.setInt(1, 0);
+							ps.setInt(2, IdDeemployer);
+							ps.executeUpdate();
+							
+						}catch (Exception e){
+							
+						}
+						//ENDTEST
 						System.out.println("\n 3AAK3AK HNA HNA");
-						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`, `id_employer`) VALUES (?,?,?)";
+						query="INSERT INTO `poste_de_travail`(`date_dentree_service`, `type`,`status`, `id_employer`) VALUES (?,?,?,?)";
 						ps=con.conn.prepareStatement(query);
 						ps.setString(1, dateNow);
 						ps.setString(2, "la_Manutention_a_risques");
-						ps.setInt(3, IdDeemployer);
+						ps.setInt(3, 1);
+						ps.setInt(4, IdDeemployer);
 						ps.executeUpdate();
 
 						query = "SELECT * FROM `poste_de_travail` ORDER BY `poste_de_travail`.id_post_de_travail DESC LIMIT 1";
@@ -520,53 +591,7 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 	}
 
 
-	//@Override
-	public void calculerSalaires2(int id,double vleurAjoute,int choixtype) {
-		// TODO Auto-generated method stub
-		System.out.println("\n calculerSalaires2 START");
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");		
-		dateNow = (formatter.format(date)) ;
-		double valeurtotal = 0;
-		if (choixtype == 1) {
-			valeurtotal = (20 * vleurAjoute) / 100;
-			valeurtotal = valeurtotal + 1500 ;
-			System.out.println("\n MEZYAN 1");
-		}else if (choixtype == 2) {
-			valeurtotal = (20 * vleurAjoute) / 100;
-			valeurtotal = valeurtotal + 2500 ;
-			System.out.println("\n MEZYAN 2");
-		}else if (choixtype == 3) {
-			valeurtotal = vleurAjoute * 5 ;
-			System.out.println("\n MEZYAN 3");
-		}else if (choixtype == 4) {
-			valeurtotal = vleurAjoute * 50 ;
-		}else if (choixtype == 5) {
-			valeurtotal = vleurAjoute * 5 ;
-			//valeurtotal = valeurtotal + 200 ;
-			valeurtotal = valeurtotal + ProductionRisqueInterface.salaireFixeProductionRisque ;
-			
-		}else if (choixtype == 6) {
-			valeurtotal = vleurAjoute * 50 ;
-			valeurtotal = valeurtotal + MentionaireInterface.salaireFixeMentionaire ;
-		}
-		con.Connect();
-		PreparedStatement ps = null;
-		try {
-			System.out.println("\n BDAT CHLADA");
-			String query="INSERT INTO `info_salaire`(`date`, `chifredaffire`, `Salire_total`, `id_poste_de_travail`) VALUES (?,?,?,?)";
-			ps=con.conn.prepareStatement(query);
-			ps.setString(1, dateNow);
-			ps.setDouble(2, vleurAjoute);
-			ps.setDouble(3, valeurtotal);
-			ps.setInt(4, id);
-			ps.executeUpdate();
-			System.out.println("\n Salaire ajouter avec succes");
-		}catch(Exception e) {
-			System.out.print(e);
-		}
 
-
-	}
 	@Override
 	public void calculerSalaires(int id,double vleurAjoute,int choixtype) {
 		// TODO Auto-generated method stub
@@ -606,22 +631,6 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 			System.out.print(e);
 		}
 	}
-	
-	
-	static int myMethod(int id) throws SQLException {
-		String query = "";
-		int IdDePost = 0;
-		String TypeDePost = "";
-		int countpost = 0;
-		query = "SELECT * FROM `employe`,`poste_de_travail` WHERE `employe`.`id_employer` = `poste_de_travail`.`id_employer` AND `employe`.`id_employer` ="+id + " ORDER BY `poste_de_travail`.id_post_de_travail DESC LIMIT 1";
-		con.Connect();
-		con.stat = con.conn.createStatement();
-		con.rs = con.stat.executeQuery(query);
-		while(con.rs.next()) {
-			countpost ++;
-		}
-	    return countpost;
-	 }
 
 
 	public void salaireMoyen() throws SQLException {
@@ -638,12 +647,12 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 				//2
 				System.out.println("\n choisi le type de l'employé pour la Moyene de Salaire :"
 				 		 + "\n -----------------------"
-				 		 + "\n Ceux affectés à la Vente          :1"
-				 		 + "\n Ceux affectés à la Représentation :2"
-				 		 + "\n Ceux affectés à la Production     :3"
-				 		 + "\n Ceux affectés à la Manutention    :4"
-				 		 + "\n Ceux affectés à la Production a risques :5"
-				 		 + "\n Ceux affectés à la Manutention a risques:6");
+				 		 + "\n Ceux affectés à la Vente ----------------->:1"
+				 		 + "\n Ceux affectés à la Représentation -------->:2"
+				 		 + "\n Ceux affectés à la Production ------------>:3"
+				 		 + "\n Ceux affectés à la Manutention  ---------->:4"
+				 		 + "\n Ceux affectés à la Production a risques -->:5"
+				 		 + "\n Ceux affectés à la Manutention a risques ->:6");
 				choixtype = scan.nextInt();
 				try {
 					AfficherEmploye(choixtype);
@@ -669,7 +678,6 @@ public class Personnel extends Employe implements MentionaireInterface,Productio
 				while(con.rs.next()) {
 					System.out.println(" -------> ID:  " + "\t" +con.rs.getInt("id_poste_de_travail") + "\n \t La Moyene: " + con.rs.getString("Moyene"));
 				}
-				
 				break;
 				default:
 		}
